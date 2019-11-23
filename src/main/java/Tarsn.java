@@ -16,7 +16,7 @@
 import java.io.File;
 import java.io.IOException;
 
-public class Tars2
+public class Tarsn
 {
     public static void main(String[] args) throws IOException {
         File in1 = null;
