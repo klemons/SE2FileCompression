@@ -18,9 +18,7 @@
 
 #### For Huffman
 java -cp target/classes SchubsH <"filename">
-
-then
-
+***
 java -cp target/classes Deschubs <"filename">.hh
 
 #### For LZW
