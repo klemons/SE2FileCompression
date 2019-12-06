@@ -19,14 +19,19 @@ java -cp target/classes SchubsH src/files/dummy.txt
 
 then
 
+
 java -cp target/classes Deschubs src/files/test1.txt.hh
 
+
 For Globbing use *.txt or *.hh
+
 
 java -cp target/classes SchubsL src/files/dummy.txt
 
 then
 
 java -cp target/classes Deschubs src/files/dummy.txt.ll
+
+
 
 For Globbing use *.txt or *.ll
