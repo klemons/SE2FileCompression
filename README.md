@@ -6,8 +6,8 @@
 
 
 WIP
-design: algorithm theory and trade offs
-tests: prove and illustrate everything
-installation: CLI instructions
-test instructions
-run examples: CLI instructions
+- design: algorithm theory and trade offs
+- tests: prove and illustrate everything
+- installation: CLI instructions
+- test instructions
+- run examples: CLI instructions
