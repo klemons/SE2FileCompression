@@ -13,6 +13,9 @@ WIP
 - test instructions
 - run examples: CLI instructions
 
+
+## CLI Instructions
+
 java -cp target/classes SchubsH src/files/test1.txt
 
 java -cp target/classes Deschubs src/files/test1.txt.hh
