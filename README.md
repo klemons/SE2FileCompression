@@ -15,9 +15,12 @@ WIP
 
 java -cp target/classes SchubsH src/files/test1.txt
 *
-java -cp target/classes Deschubs src/files/test1.hh
-
+java -cp target/classes Deschubs src/files/test1.txt.hh
+*
+For Globbing use *.txt or *.hh
 
 java -cp target/classes SchubsL src/files/test1.txt
 *
-java -cp target/classes Deschubs src/files/test1.ll
+java -cp target/classes Deschubs src/files/test1.txt.ll
+*
+For Globbing use *.txt or *.ll
