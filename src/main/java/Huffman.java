@@ -1,5 +1,3 @@
-
-
 /*************************************************************************
  *  Compilation:  javac Huffman.java
  *  Execution:    java Huffman - < input.txt   (compress)
@@ -30,6 +28,7 @@ public class Huffman {
 
     private static BinaryIn in;
     private static BinaryOut out;
+    private static String ext1 = "";
 
     // Huffman trie node
     private static class Node implements Comparable<Node> {
@@ -211,11 +210,28 @@ public class Huffman {
         }
     }
 
-
     public static void main(String[] args) {
         in = new BinaryIn(args[0]);
-        out= new BinaryOut(args[1]);
-        compress();
+        int i = args[0].lastIndexOf('.');
+        if (i > 0) {
+            ext1 = args[0].substring(i+1);
+        }
+        System.out.println(ext1);
+
+
+        if (ext1.equals("txt")) {
+            out = new BinaryOut(args[0] + ".hh");
+            compress();
+        }
+        else if (ext1.equals("hh")) {
+            String str = args[0].replace(".hh", "");
+            out = new BinaryOut(str);
+            expand();
+        }
+        else throw new RuntimeException("Illegal command line argument");
+//        in = new BinaryIn(args[0]);
+//        out= new BinaryOut(args[1]);
+//        compress();
     }
 
 }
