@@ -21,14 +21,14 @@ java -cp target/classes SchubsH <"filename">
 
 then
 
-java -cp target/classes Deschubs "<"filename">".hh
+java -cp target/classes Deschubs <"filename">.hh
 
 #### For LZW
-java -cp target/classes SchubsL "<"filename>
+java -cp target/classes SchubsL <"filename">
 
 then
 
-java -cp target/classes Deschubs <filename>.ll
+java -cp target/classes Deschubs <"filename">.ll
 
 #### For Archiving then compressing
 java -cp target/classes SchubsArc archivename <filename>
