@@ -10,15 +10,14 @@
 - LZW compression reads through and assigns codewords to various patterns of words. That way if a pattern reappears again, the dictionary storing the codewords can easily access and assign the value. This can allow LZW to "look ahead" in the table to have faster performance. Instead of common characters, LZW can build a dictionary of commonly used English words for example. This allows for the compression ratio to end up better than Huffman in the bigger picture.
 
 - tests: prove and illustrate everything
-- installation: CLI instructions
-- test instructions
-
 
 ## CLI Instructions
 
 #### For Huffman
 java -cp target/classes SchubsH <"filename">
-***
+
+then
+
 java -cp target/classes Deschubs <"filename">.hh
 
 #### For LZW
@@ -29,11 +28,11 @@ then
 java -cp target/classes Deschubs <"filename">.ll
 
 #### For Archiving then compressing
-java -cp target/classes SchubsArc archivename <filename>
+java -cp target/classes SchubsArc archivename <"filename">
 
 then
 
-java -cp target/classes Deschubs <archivename>.zl
+java -cp target/classes Deschubs <"archivename">.zl
 
 ## Testing Instructions
 
