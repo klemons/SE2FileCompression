@@ -1,5 +1,5 @@
 # SE2FileCompression
-Author: Kyle Lemons
+## Author: Kyle Lemons
 Project for CS 375 - Software Engineering II
 Prof: Dr. Brent Reeves
 
