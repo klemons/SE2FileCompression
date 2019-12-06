@@ -9,13 +9,14 @@
  *
  *************************************************************************/
 
-public class LZW {
+public class SchubsL {
     private static final int R = 256;        // number of input chars
     private static final int L = 4096;       // number of codewords = 2^W
     private static final int W = 12;         // codeword width
 	
 	private static BinaryIn in;
     private static BinaryOut out;
+    private static String ext1 = "";
 
     public static void compress() { 
         String input = in.readString();
@@ -64,9 +65,24 @@ public class LZW {
 
 
     public static void main(String[] args) {
-        if      (args[0].equals("-")) compress();
-        else if (args[0].equals("+")) expand();
-        else throw new RuntimeException("Illegal command line argument");
+        for (int i = 0; i < args.length; i++) {
+            in = new BinaryIn(args[i]);
+            int n = args[i].lastIndexOf('.');
+            if (n > 0) {
+                ext1 = args[i].substring(n + 1);
+            }
+            System.out.println(ext1);
+
+
+            if (ext1.equals("txt")) {
+                out = new BinaryOut(args[i] + ".ll");
+                compress();
+            } else if (ext1.equals("ll")) {
+                String str = args[i].replace(".ll", "");
+                out = new BinaryOut(str);
+                expand();
+            } else throw new RuntimeException("Illegal command line argument");
+        }
     }
 
 }

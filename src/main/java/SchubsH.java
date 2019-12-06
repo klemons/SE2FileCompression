@@ -20,7 +20,7 @@
  *
  *************************************************************************/
 
-public class Huffman {
+public class SchubsH {
 
     // alphabet size of extended ASCII
     private static final int R = 256;
@@ -211,27 +211,29 @@ public class Huffman {
     }
 
     public static void main(String[] args) {
-        in = new BinaryIn(args[0]);
-        int i = args[0].lastIndexOf('.');
-        if (i > 0) {
-            ext1 = args[0].substring(i+1);
-        }
-        System.out.println(ext1);
+        for (int i = 0; i < args.length; i++) {
+            in = new BinaryIn(args[i]);
+
+            //This code determines the files extension
+            int n = args[i].lastIndexOf('.');
+            if (n > 0) {
+                ext1 = args[i].substring(n + 1);
+            }
+            System.out.println(ext1);
 
 
-        if (ext1.equals("txt")) {
-            out = new BinaryOut(args[0] + ".hh");
-            compress();
-        }
-        else if (ext1.equals("hh")) {
-            String str = args[0].replace(".hh", "");
-            out = new BinaryOut(str);
-            expand();
-        }
-        else throw new RuntimeException("Illegal command line argument");
+            if (ext1.equals("txt")) {
+                out = new BinaryOut(args[i] + ".hh");
+                compress();
+            } else if (ext1.equals("hh")) {
+                String str = args[i].replace(".hh", "");
+                out = new BinaryOut(str);
+                expand();
+            } else throw new RuntimeException("Illegal command line argument");
 //        in = new BinaryIn(args[0]);
 //        out= new BinaryOut(args[1]);
 //        compress();
+        }
     }
 
 }
