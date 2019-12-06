@@ -17,14 +17,14 @@
 ## CLI Instructions
 
 #### For Huffman
-java -cp target/classes SchubsH <filename>
+java -cp target/classes SchubsH "<"filename"z"
 
 then
 
-java -cp target/classes Deschubs <filename>.hh
+java -cp target/classes Deschubs "<"filename">".hh
 
 #### For LZW
-java -cp target/classes SchubsL <filename>
+java -cp target/classes SchubsL "<"filename>
 
 then
 
