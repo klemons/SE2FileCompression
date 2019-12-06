@@ -14,10 +14,10 @@ WIP
 - run examples: CLI instructions
 
 java -cp target/classes SchubsH src/files/test1.txt
-~
+*
 java -cp target/classes Deschubs src/files/test1.hh
 
 
 java -cp target/classes SchubsL src/files/test1.txt
-~
+*
 java -cp target/classes Deschubs src/files/test1.ll
