@@ -11,19 +11,22 @@ WIP
 - tests: prove and illustrate everything
 - installation: CLI instructions
 - test instructions
-- run examples: CLI instructions
 
 
 ## CLI Instructions
 
-java -cp target/classes SchubsH src/files/test1.txt
+java -cp target/classes SchubsH src/files/dummy.txt
+
+then
 
 java -cp target/classes Deschubs src/files/test1.txt.hh
 
 For Globbing use *.txt or *.hh
 
-java -cp target/classes SchubsL src/files/test1.txt
+java -cp target/classes SchubsL src/files/dummy.txt
 
-java -cp target/classes Deschubs src/files/test1.txt.ll
+then
+
+java -cp target/classes Deschubs src/files/dummy.txt.ll
 
 For Globbing use *.txt or *.ll
