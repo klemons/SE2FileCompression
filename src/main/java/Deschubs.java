@@ -183,6 +183,8 @@ public class Deschubs {
                 out = new BinaryOut(str);
                 expandLZW();
                 Untars.main(new String[] {str});
+            } else if(ext1.equals("zh")){
+                throw new RuntimeException("This file type not supported");
             } else throw new RuntimeException("Illegal command line argument");
 //        in = new BinaryIn(args[0]);
 //        out= new BinaryOut(args[1]);
