@@ -1,29 +1,8 @@
-/*************************************************************************
- *  Compilation:  javac Huffman.java
- *  Execution:    java Huffman - < input.txt   (compress)
- *  Execution:    java Huffman + < input.txt   (expand)
- *  Dependencies: BinaryIn.java BinaryOut.java
- *  Data files:   http://algs4.cs.princeton.edu/55compression/abra.txt
- *                http://algs4.cs.princeton.edu/55compression/tinytinyTale.txt
- *  modified:     change logging to true to enable debugging info to StdErr
- *
- *
- *  Compress or expand a binary input stream using the Huffman algorithm.
- *
- *  % java Huffman - < abra.txt | java BinaryDump 60
- *  010100000100101000100010010000110100001101010100101010000100
- *  000000000000000000000000000110001111100101101000111110010100
- *  120 bits
- *
- *  % java Huffman - < abra.txt | java Huffman +
- *  ABRACADABRA!
- *
- *************************************************************************/
-
-public class SchubsH {
-
+public class Deschubs {
     // alphabet size of extended ASCII
-    private static final int R = 256;
+    private static final int R = 256;        // number of input chars
+    private static final int L = 4096;       // number of codewords = 2^W
+    private static final int W = 12;         // codeword width
     public static boolean logging = true;
 
     private static BinaryIn in;
@@ -58,71 +37,16 @@ public class SchubsH {
 
     public static void err_print(String msg)
     {
-	if (logging)
-	    System.err.print(msg);
+        if (logging)
+            System.err.print(msg);
     }
 
     public static void err_println(String msg)
     {
-	if (logging)
-	    {
-		System.err.println(msg);
-	    }
-    }
-
-
-    // compress bytes from standard input and write to standard output
-    public static void compress() {
-        // read the input
-        String s = in.readString();
-        char[] input = s.toCharArray();
-
-        // tabulate frequency counts
-        int[] freq = new int[R];
-        for (int i = 0; i < input.length; i++)
-            freq[input[i]]++;
-
-        // build Huffman trie
-        Node root = buildTrie(freq);
-
-        // build code table
-        String[] st = new String[R];
-        buildCode(st, root, "");
-
-        // print trie for decoder
-        writeTrie(root);
-	err_println("writeTrie");
-
-        // print number of bytes in original uncompressed message
-        out.write(input.length);
-	err_println("writing input length " + input.length);
-
-	err_println("happily encoding... ");
-	String compressed ="";
-        // use Huffman code to encode input
-        for (int i = 0; i < input.length; i++) {
-            String code = st[input[i]];
-	    err_print("Char " + input[i] + " ");
-            for (int j = 0; j < code.length(); j++) {
-                if (code.charAt(j) == '0') {
-                    out.write(false);
-                    compressed += "0";
-		    err_print("0");
-                }
-                else if (code.charAt(j) == '1') {
-                    out.write(true);
-                    compressed += "1";
-		    err_print("1");
-                }
-                else throw new RuntimeException("Illegal state");
-            }
-	    err_println("");
+        if (logging)
+        {
+            System.err.println(msg);
         }
-
-        System.out.println(compressed);
-
-        // flush output stream
-        out.flush();
     }
 
     // build the Huffman trie given frequencies
@@ -139,7 +63,7 @@ public class SchubsH {
             Node left  = pq.delMin();
             Node right = pq.delMin();
             Node parent = new Node('\0', left.freq + right.freq, left, right);
-	    err_println("buildTrie parent " + left.freq + " " + right.freq);
+            err_println("buildTrie parent " + left.freq + " " + right.freq);
             pq.insert(parent);
         }
         return pq.delMin();
@@ -151,11 +75,11 @@ public class SchubsH {
         if (x.isLeaf()) {
             out.write(true);
             out.write(x.ch);
-	    err_println("T" + x.ch);
+            err_println("T" + x.ch);
             return;
         }
         out.write(false);
-	err_print("F");
+        err_print("F");
 
         writeTrie(x.left);
         writeTrie(x.right);
@@ -169,16 +93,16 @@ public class SchubsH {
         }
         else {
             st[x.ch] = s;
-	    err_println("buildCode " + x.ch + " " + s);
+            err_println("buildCode " + x.ch + " " + s);
         }
     }
 
 
     // expand Huffman-encoded input from standard input and write to standard output
-    public static void expand() {
+    public static void expandHuff() {
 
         // read in Huffman trie from input stream
-        Node root = readTrie(); 
+        Node root = readTrie();
 
         // number of bytes to write
         int length = in.readInt();
@@ -196,16 +120,40 @@ public class SchubsH {
         out.flush();
     }
 
+    public static void expandLZW() {
+        String[] st = new String[L];
+        int i; // next available codeword value
+
+        // initialize symbol table with all 1-character strings
+        for (i = 0; i < R; i++)
+            st[i] = "" + (char) i;
+        st[i++] = "";                        // (unused) lookahead for EOF
+
+        int codeword = in.readInt(W);
+        String val = st[codeword];
+
+        while (true) {
+            out.write(val);
+            codeword = in.readInt(W);
+            if (codeword == R) break;
+            String s = st[codeword];
+            if (i == codeword) s = val + val.charAt(0);   // special case hack
+            if (i < L) st[i++] = val + s.charAt(0);
+            val = s;
+        }
+        out.close();
+    }
+
 
     private static Node readTrie() {
         boolean isLeaf = in.readBoolean();
         if (isLeaf) {
-	    char x = in.readChar();
-	    err_println("t: " + x );
+            char x = in.readChar();
+            err_println("t: " + x );
             return new Node(x, -1, null, null);
         }
         else {
-	    err_print("f");
+            err_print("f");
             return new Node('\0', -1, readTrie(), readTrie());
         }
     }
@@ -219,17 +167,19 @@ public class SchubsH {
             if (n > 0) {
                 ext1 = args[i].substring(n + 1);
             }
-            System.out.println(ext1);
 
-
-            if (ext1.equals("txt")) {
-                out = new BinaryOut(args[i] + ".hh");
-                compress();
+            if (ext1.equals("ll")) {
+                String str = args[i].replace(".ll", "");
+                out = new BinaryOut(str);
+                expandLZW();
+            } else if (ext1.equals("hh")) {
+                String str = args[i].replace(".hh", "");
+                out = new BinaryOut(str);
+                expandHuff();
             } else throw new RuntimeException("Illegal command line argument");
 //        in = new BinaryIn(args[0]);
 //        out= new BinaryOut(args[1]);
 //        compress();
         }
     }
-
 }
