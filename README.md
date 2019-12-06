@@ -17,7 +17,7 @@
 ## CLI Instructions
 
 #### For Huffman
-java -cp target/classes SchubsH "<filename>"
+java -cp target/classes SchubsH <"filename">
 
 then
 
