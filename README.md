@@ -34,6 +34,10 @@ then
 
 java -cp target/classes Deschubs src/files/"archivename".zl
 
+## Installation Instructions
+
+Clone the project, and cd to the extracted folder (SE2FileCompression)
+
 ## Testing Instructions
 
 mvn clean
