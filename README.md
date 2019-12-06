@@ -14,25 +14,25 @@
 ## CLI Instructions
 
 #### For Huffman
-java -cp target/classes SchubsH <"filename">
+java -cp target/classes SchubsH src/files/"filename"
 
 then
 
-java -cp target/classes Deschubs <"filename">.hh
+java -cp target/classes Deschubs src/files/"filename".hh
 
 #### For LZW
-java -cp target/classes SchubsL <"filename">
+java -cp target/classes SchubsL src/files/"filename"
 
 then
 
-java -cp target/classes Deschubs <"filename">.ll
+java -cp target/classes Deschubs src/files/"filename".ll
 
 #### For Archiving then compressing
-java -cp target/classes SchubsArc archivename <"filename">
+java -cp target/classes SchubsArc src/files/"archivename" src/files/"filename"
 
 then
 
-java -cp target/classes Deschubs <"archivename">.zl
+java -cp target/classes Deschubs src/files/"archivename".zl
 
 ## Testing Instructions
 
