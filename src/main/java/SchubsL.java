@@ -77,7 +77,11 @@ public class SchubsL {
             if (ext1.equals("txt")) {
                 out = new BinaryOut(args[i] + ".ll");
                 compress();
-            }  else throw new RuntimeException("Illegal command line argument");
+            }
+            else if (ext1.equals("zl")) {
+                out = new BinaryOut(args[i]);
+                compress();
+            }else throw new RuntimeException("Illegal command line argument");
 //            else if (ext1.equals("ll")) {
 //                String str = args[i].replace(".ll", "");
 //                out = new BinaryOut(str);

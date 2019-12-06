@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Deschubs {
     // alphabet size of extended ASCII
     private static final int R = 256;        // number of input chars
@@ -158,7 +160,7 @@ public class Deschubs {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         for (int i = 0; i < args.length; i++) {
             in = new BinaryIn(args[i]);
 
@@ -176,6 +178,11 @@ public class Deschubs {
                 String str = args[i].replace(".hh", "");
                 out = new BinaryOut(str);
                 expandHuff();
+            } else if(ext1.equals("zl")) {
+                String str = args[i].replace(".zl", "");
+                out = new BinaryOut(str);
+                expandLZW();
+                Untars.main(new String[] {str});
             } else throw new RuntimeException("Illegal command line argument");
 //        in = new BinaryIn(args[0]);
 //        out= new BinaryOut(args[1]);
