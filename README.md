@@ -36,3 +36,9 @@ java -cp target/classes Deschubs src/files/dummy.txt.ll
 
 
 For Globbing use *.txt or *.ll
+
+## Testing Instructions
+
+mvn clean
+
+mvn test
