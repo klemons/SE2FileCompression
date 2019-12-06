@@ -1,7 +1,7 @@
 # SE2FileCompression
-## Author: Kyle Lemons
-Project for CS 375 - Software Engineering II
-Prof: Dr. Brent Reeves
+### Author: Kyle Lemons
+### Project for CS 375 - Software Engineering II
+### Prof: Dr. Brent Reeves
 
 WIP
 design: algorithm theory and trade offs
